@@ -20,7 +20,7 @@ public class Main {
         System.out.println();
 
         Cat cat1 = new Cat("Tom");
-        cat1.run(205);
+        cat1.run(150);
         cat1.swim(0);
         System.out.println();
 

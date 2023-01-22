@@ -18,7 +18,7 @@ public class Dog extends Animals{
         System.out.println(name + " swam " + obstacle + " meters");
         }
         else {
-            System.out.println(name + " can't swam more then 200 meters");
+            System.out.println(name + " can't swim more then 200 meters");
         }
     }
 }

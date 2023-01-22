@@ -8,9 +8,12 @@ public class Cat extends Animals {
 
     @Override
     public void run(int obstacle) {
-        System.out.println(name + " can't run more then 200 meters");
+        if(obstacle<=200){
+            System.out.println(name + " ran " + obstacle + " meters");
+        }else {
+            System.out.println(name + " can't run more then 200 meters");
+        }
     }
-
     @Override
     public void swim(int obstacle) {
         System.out.println(name + " can't swim");
