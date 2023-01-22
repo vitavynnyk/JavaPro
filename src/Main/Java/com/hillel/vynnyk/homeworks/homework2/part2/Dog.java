@@ -5,17 +5,17 @@ public class Dog extends Animals{
         super(name);
     }
     @Override
-    public void run(int obstacle) {
-        if(obstacle<=500){
-        System.out.println(name + " ran " + obstacle + " meters");}
+    public void run(int distance) {
+        if(distance<=500){
+        System.out.println(name + " ran " + distance + " meters");}
         else {
             System.out.println(name + " can't run more then 500 meters");
         }
     }
     @Override
-    public void swim(int obstacle) {
-        if (obstacle<=10){
-        System.out.println(name + " swam " + obstacle + " meters");
+    public void swim(int distance) {
+        if (distance<=10){
+        System.out.println(name + " swam " + distance + " meters");
         }
         else {
             System.out.println(name + " can't swim more then 200 meters");

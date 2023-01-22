@@ -7,7 +7,7 @@ public abstract class Animals {
         this.name = name;
     }
 
-    public abstract void run(int obstacle);
+    public abstract void run(int distance);
 
-    public abstract void swim(int obstacle);
+    public abstract void swim(int distance);
 }

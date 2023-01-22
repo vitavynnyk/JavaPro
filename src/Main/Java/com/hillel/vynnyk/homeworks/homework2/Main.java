@@ -4,8 +4,7 @@ import com.hillel.vynnyk.homeworks.homework2.part1.Car;
 import com.hillel.vynnyk.homeworks.homework2.part2.Cat;
 import com.hillel.vynnyk.homeworks.homework2.part2.Dog;
 import com.hillel.vynnyk.homeworks.homework2.part3.figures.Circle;
-import com.hillel.vynnyk.homeworks.homework2.part3.figures.Figures;
-import com.hillel.vynnyk.homeworks.homework2.part3.figures.Squaree;
+import com.hillel.vynnyk.homeworks.homework2.part3.figures.Square;
 import com.hillel.vynnyk.homeworks.homework2.part3.figures.Triangle;
 
 public class Main {
@@ -25,12 +24,11 @@ public class Main {
         System.out.println();
 
         double[] figures = new double[]{
-                new Triangle("Triangle", 5, 3).square(),
-                new Circle("Circle", 4).square(),
-                new Squaree("Square", 4).square(),
-                new Circle("Circle2",4).square()
+                new Triangle( 5, 3).area(),
+                new Circle(4).area(),
+                new Square( 4).area(),
+                new Circle(5).area()
         };
-
         double sum = 0;
         for (double figure : figures) {
             sum += figure;
