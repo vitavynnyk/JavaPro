@@ -15,7 +15,6 @@ public class PlayGame {
 
         System.out.println("Please enter your word:");
         Scanner scanner = new Scanner(System.in);
-        char[] result = words[n].toCharArray();
         char a = '#';
 
         while (true) {
@@ -25,20 +24,17 @@ public class PlayGame {
                 break;
             } else {
                 try {
-
-                    char[] userValue2 = userValue.toCharArray();
-                    for (int i = 0; i <= result.length; i++) {
-                        if (userValue2[i] == result[i]) {
-                            System.out.print(result[i]);
+                    for (int i = 0; i <= words[n].length(); i++) {
+                        if (userValue.charAt(i)==(words[n].charAt(i))) {
+                            System.out.print(words[n].charAt(i));
                         }
-                        if (userValue2[i] != result[i]) {
-                            result[i] = a;
-                            System.out.print(result[i]);
+                        else  {
+                            System.out.print(a);
                         }
                     }
                     System.out.println(" try again");
 
-                } catch (ArrayIndexOutOfBoundsException e) {
+                } catch (StringIndexOutOfBoundsException e) {
                     if (userValue.length() <= words[n].length()) {
                         int b = 15 - userValue.length() ;
                         for (int i = 0; i < b; i++) {
