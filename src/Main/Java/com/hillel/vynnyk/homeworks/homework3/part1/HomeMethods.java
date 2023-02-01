@@ -23,9 +23,8 @@ public class HomeMethods {
         return (string1.reverse().toString());
     }
 
-    public static boolean isPalindrome (String string){
-        StringBuilder abc = new StringBuilder(string);
-        return abc.toString().equals(abc.reverse().toString());
+    public static boolean isPalindrome (String input){
+        return input.equals(stringReverse(input));
         }
     }
 
