@@ -1,48 +1,49 @@
 package com.hillel.vynnyk.homeworks.homework3;
 
-import com.hillel.vynnyk.homeworks.homework3.part1.HomeMethods;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import static com.hillel.vynnyk.homeworks.homework3.part1.HomeMethods.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestHomeMethod {
     @Test
-    public void test1() {
+    public void shouldFindSymbolOccurrence() {
         String string = " Hello my friend";
         char char1 = 'l';
-        Assertions.assertEquals(2, HomeMethods.findSymbolOccurrence(string, char1));
+        assertEquals(2, findSymbolOccurrence(string, char1));
     }
 
     @Test
-    public void test2() {
+    public void shouldFindWordPosition() {
         String string1 = "Apollo";
         String string2 = "pollo";
-        Assertions.assertEquals(1, HomeMethods.findWordPosition(string1, string2));
+        assertEquals(1, findWordPosition(string1, string2));
 
     }
 
     @Test
-    public void test3() {
+    public void shouldFindWordPosition2() {
         String string1 = "Apollo";
         String string2 = "advice";
-        Assertions.assertEquals(-1, HomeMethods.findWordPosition(string1, string2));
+        assertEquals(-1, findWordPosition(string1, string2));
 
     }
 
     @Test
-    public void test4() {
-        StringBuilder s = new StringBuilder("123");
-        Assertions.assertEquals("321", HomeMethods.stringReverse(s.toString()));
+    public void shouldStringReverse() {
+        String input = "123";
+        assertEquals("321", stringReverse(input));
     }
 
     @Test
-    public void test5() {
+    public void shouldApprovePalindrome() {
         String string1 = "mem";
-        Assertions.assertTrue(HomeMethods.isPalindrome(string1));
+        assertTrue(isPalindrome(string1));
     }
 
     @Test
-    public void test6() {
+    public void shouldApprovePalindrome2() {
         String string1 = "mema";
-        Assertions.assertFalse(HomeMethods.isPalindrome(string1));
+       assertFalse(isPalindrome(string1));
     }
 }
