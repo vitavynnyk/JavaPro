@@ -20,7 +20,6 @@ public class TestMyList {
         MyList array = new MyList(new String[]{"V", "K", "S"});
         assertEquals("V", array.remove(0));
     }
-
     @Test
     public void containsItem(){
         MyList array = new MyList(new String[]{"V", "K", "S"});
