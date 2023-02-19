@@ -1,8 +1,6 @@
 package com.hillel.vynnyk.homeworks.homework6;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class ArrayListMethods {
 
@@ -32,28 +30,29 @@ public class ArrayListMethods {
         return newList;
     }
 
-    public static int calcOccurrence(ArrayList<String> list) {
+    public static List<String> calcOccurrence(ArrayList<String> list) {
         ArrayList<String> newList = new ArrayList<>();
         int count = 0;
         for (String item : list) {
             count = Collections.frequency(list, item);
             if (!newList.contains(item)) {
                 newList.add(item);
-            System.out.println( item+ ": " + count + " ");
             }
-        }return count;
+        }
+        return newList;
     }
 
-    public static ArrayList<Item> findOccurrence(ArrayList<String> list) {
+    public static LinkedHashSet<Item> findOccurrence(ArrayList<String> list) {
         ArrayList<Item> newList = new ArrayList<>();
         int count = 0;
         for (String item : list) {
             count = Collections.frequency(list, item);
-            if(!newList.toString().contains(item)) {
-                newList.add(new Item(item, count));
-            }
-        }System.out.println(newList);
-        return newList;
+            newList.add(new Item(item, count));}
+        LinkedHashSet<Item> set = new LinkedHashSet<>(newList);
+        for (Object o : set) {
+            System.out.println(o);
+        }
+        return set;
     }
 
 }

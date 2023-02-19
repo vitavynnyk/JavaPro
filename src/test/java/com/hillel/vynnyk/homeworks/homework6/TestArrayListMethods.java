@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 import static com.hillel.vynnyk.homeworks.homework6.ArrayListMethods.*;
@@ -47,15 +48,14 @@ public class TestArrayListMethods {
     public void shouldCalcOccurance(){
         ArrayList <String> list = new ArrayList<>();
         list.add("N");
-        list.add("N");
-        list.add("N");
-        assertEquals(3,calcOccurrence(list));
+        list.add("A");
+        assertEquals(list,calcOccurrence(list));
     }
 
     @Test
     public void shouldFindOccurrence(){
         ArrayList <String> list = new ArrayList<>();
-        ArrayList<Item> items = new ArrayList<>();
+        LinkedHashSet<Item> items = new LinkedHashSet<>();
         items.add(new Item("A",2));;
         items.add(new Item("B",1));
         list.add("A");
