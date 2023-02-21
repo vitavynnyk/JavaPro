@@ -58,6 +58,7 @@ public class MyList implements HillelList {
         }
         return -1;
     }
+
     @Override
     public int size() {
         return array.length;
