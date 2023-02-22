@@ -4,10 +4,10 @@ import java.util.*;
 
 
 public class FileNavigator {
-    Map<String, ArrayList<FileData>> map = new HashMap<>();
+    Map<String,List<FileData>> map = new HashMap<>();
 
-    public Map<String, ArrayList<FileData>> add(String path, FileData file) {
-        ArrayList<FileData> data = new ArrayList<>();
+    public Map<String, List<FileData>> add(String path, FileData file) {
+        List<FileData> data = new ArrayList<>();
         if (map.containsKey(path)) {
             map.get(path).add(file);
         } else {
@@ -18,16 +18,14 @@ public class FileNavigator {
         return map;
     }
 
-    public ArrayList<FileData> find(String key) {
-        if (map.containsKey(key)) {
+    public List<FileData> find(String key) {
             return map.get(key);
-        }
-        return null;
+
     }
 
-    public ArrayList<FileData> filterBySize(int size) {
-        ArrayList<FileData> data = new ArrayList<>();
-        for (ArrayList<FileData> fileData : map.values()) {
+    public List<FileData> filterBySize(int size) {
+        List<FileData> data = new ArrayList<>();
+        for (List<FileData> fileData : map.values()) {
             for (FileData file : fileData) {
                 if (file.getSize() <= size) {
                     data.add(file);
@@ -37,15 +35,15 @@ public class FileNavigator {
         return data;
     }
 
-    public Map<String, ArrayList<FileData>> remove(String key) {
+    public  boolean remove(String key) {
         map.remove(key);
-        return map;
+        return true;
     }
 
     public ArrayList<FileData> sortBySize() {
         ArrayList<FileData> data = new ArrayList<>();
         SizeComporator mySizeComporator = new SizeComporator();
-        for (ArrayList<FileData> fileData : map.values()) {
+        for (List<FileData> fileData : map.values()) {
             data.addAll(fileData);
         }
         data.sort(mySizeComporator);
