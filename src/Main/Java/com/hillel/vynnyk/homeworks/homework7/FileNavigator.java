@@ -7,10 +7,14 @@ public class FileNavigator {
     Map<String,List<FileData>> map = new HashMap<>();
 
     public Map<String, List<FileData>> add(String path, FileData file) {
-        List<FileData> data = new ArrayList<>();
+
+//        if(!path.equals(file.getPath())) {
+//        throw new RuntimeException("Paths are not equal");
+//      }
         if (map.containsKey(path)) {
             map.get(path).add(file);
         } else {
+            List<FileData> data = new ArrayList<>();
             data.add(file);
             map.put(path, data);
         }
