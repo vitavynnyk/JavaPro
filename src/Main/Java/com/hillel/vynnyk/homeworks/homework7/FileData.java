@@ -6,6 +6,7 @@ public class FileData {
 
     private String name;
     private int size;
+    private String path;
 
 
     public FileData(String name,int size) {
