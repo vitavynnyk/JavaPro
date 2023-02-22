@@ -46,3 +46,4 @@ Thumbs.db
 *.mp3
 *.mp5
 
+/.gradle/
