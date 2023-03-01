@@ -1,64 +1,99 @@
 package com.hillel.vynnyk.homeworks.homework8;
 
-import java.io.*;
-import java.util.Properties;
+import com.hillel.vynnyk.homeworks.homework6.ArrayListMethods;
 
-public class FileLogger {
-    FileLoggerConfiguration configuration = new FileLoggerConfiguration(LoggingLevel.DEBUG, 32);
-    Properties properties = new Properties();
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 
-    public void debug(String message) {
+public class FileLogger implements Logger {
+    private final FileLoggerConfiguration fileLoggerConfiguration;
+    private File file;
+    private FileWriter fileWriter;
 
-        try (InputStream in = new FileInputStream(configuration.getFile())) {
-            if (in == null) {
-                throw new FileNotFoundException();
-            }
-            if (configuration.getLevel().equals(LoggingLevel.DEBUG)) {
-                properties.setProperty("Path", configuration.getFile().getPath());
-                properties.setProperty("Level", configuration.getLevel().name);
-                properties.setProperty("Max-size", String.valueOf(configuration.getMaxSize()));
+    public FileLogger(FileLoggerConfiguration fileLoggerConfiguration) throws IOException {
+        this.fileLoggerConfiguration = fileLoggerConfiguration;
+        var outputDir = new File(fileLoggerConfiguration.getPath());
+        outputDir.mkdirs();
 
-                OutputStream out = new FileOutputStream(configuration.getFile(), true);
-                properties.store(out, "Message: " + message);
-            } else {
-                properties.setProperty("Path", configuration.getFile().getPath());
-                properties.setProperty("Level", configuration.getLevel().name);
-                properties.setProperty("Max-size", String.valueOf(configuration.getMaxSize()));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        var outputFileName = resolveOutputFileNameWithOutStream(outputDir);
+
+        this.file = new File(fileLoggerConfiguration.getPath() + "/" + outputFileName);
+        this.fileWriter = new FileWriter(file, true);
+
+    }
+
+    private String resolveOutputFileName(File outputDir) throws IOException {
+        return Files.list(outputDir.toPath())
+                .map(path -> path.toFile().getName())
+                .filter(filename -> filename.startsWith("file"))
+                .sorted(Comparator.<String>naturalOrder().reversed())
+                .findFirst()
+                .orElseGet(this::createFileName);
+    }
+
+    private String resolveOutputFileNameWithOutStream(File outputDir) throws IOException {
+        var files = ArrayListMethods.toList(outputDir.list());
+        files.sort(Comparator.<String>naturalOrder().reversed());
+        if (files.size() > 0) {
+            return files.get(0);
+        }
+        return createFileName();
+    }
+
+    private void changeOutputFile() throws IOException {
+        if (fileWriter != null) {
+            fileWriter.close();
+        }
+        file = new File(fileLoggerConfiguration.getPath() + "/" + createFileName());
+        fileWriter = new FileWriter(file, true);
+    }
+
+    protected String createFileName() {
+        return "file" + LocalDateTime.now()
+                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH-mm-ss"));
+    }
+
+    @Override
+    public void debug(String message) throws IOException {
+        writeMessage(message);
+    }
+
+    @Override
+    public void info(String message) throws IOException {
+        if (fileLoggerConfiguration.getLevel().equals(LoggingLevel.INFO.name)) {
+            writeMessage(message);
+        }
+    }
+
+    private void writeMessage(String message) throws IOException {
+        String info = LocalDateTime.now() + " " + fileLoggerConfiguration.getLevel() + " " + message + "\n";
+        int maxSize = Integer.parseInt(fileLoggerConfiguration.getMaxSize());
+        long size = Files.size(Path.of(file.getPath()));
+        if (size > maxSize) {
+            changeOutputFile();
+        }
+        try {
+            fileWriter.write(info);
+            fileWriter.flush();
+        } catch (IOException exception) {
+            exception.printStackTrace();
         }
     }
 
 
-    public void info(String message) {
-        try (InputStream in = new FileInputStream(configuration.getFile())) {
-            if (in == null) {
-                throw new FileNotFoundException();
-            }
-            if (configuration.getLevel().equals(LoggingLevel.DEBUG)) {
-                properties.setProperty("Path", configuration.getFile().getPath());
-                properties.setProperty("Level", configuration.getLevel().name);
-                properties.setProperty("Max-size", String.valueOf(configuration.getMaxSize()));
 
-                OutputStream out = new FileOutputStream(configuration.getFile(), true);
-                properties.store(out, "Message: " + message);
-            } else {
-                properties.setProperty("Path", configuration.getFile().getPath());
-                properties.setProperty("Level", configuration.getLevel().name);
-                properties.setProperty("Max-size", String.valueOf(configuration.getMaxSize()));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    public static void main(String[] args) {
-        FileLogger fileLogger = new FileLogger();
-        fileLogger.debug("Message");
+    public static void main(String[] args) throws IOException {
+        FileLoggerConfigurationLoader loader1 = new FileLoggerConfigurationLoader();
+        FileLoggerConfiguration config = loader1.load();
+        FileLogger fileLogger = new FileLogger(config);
+        fileLogger.debug("Debug Message");
         fileLogger.info("Here is info message");
-        fileLogger.info("Here is   new info message");
     }
 
 }

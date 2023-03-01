@@ -1,27 +1,34 @@
 package com.hillel.vynnyk.homeworks.homework8;
 
-import java.io.File;
-
 public class FileLoggerConfiguration {
-    private File file =  new File("src/main/resources/example.properties");
-    private LoggingLevel level;
-    private  int maxSize  ;
+    private String path;
+    private String maxSize;
+    private String  level;
 
-    public FileLoggerConfiguration(LoggingLevel level, int maxSize) {
-
-        this.level = level;
+    public FileLoggerConfiguration(String path, String maxSize, String level) {
+        this.path = path;
         this.maxSize = maxSize;
+        this.level = level;
     }
 
-    public File getFile() {
-        return file;
+    public String getPath() {
+        return path;
     }
 
-    public  LoggingLevel getLevel() {
+    public String getMaxSize() {
+        return maxSize;
+    }
+
+    public String getLevel() {
         return level;
     }
 
-    public int getMaxSize() {
-        return maxSize;
+    @Override
+    public java.lang.String toString() {
+        return "FileLoggerConfiguration{" +
+                "path='" + path + '\'' +
+                ", maxSize='" + maxSize + '\'' +
+                ", level=" + level +
+                '}';
     }
 }
