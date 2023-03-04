@@ -5,6 +5,7 @@ public interface HillelList {
          * Додати новий елемент до списка
          */
         void add(String item);
+
         /**
          * Видалити елемент із списка за визначенним індексом
          *
