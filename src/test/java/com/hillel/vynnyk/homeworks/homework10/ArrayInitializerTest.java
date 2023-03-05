@@ -1,6 +1,5 @@
 package com.hillel.vynnyk.homeworks.homework10;
 
-import com.hillel.vynnyk.homeworks.homework8.ArrayInitializer;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
