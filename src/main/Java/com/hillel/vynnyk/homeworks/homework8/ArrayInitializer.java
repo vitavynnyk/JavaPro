@@ -1,4 +1,4 @@
-package com.hillel.vynnyk.homeworks.homework10;
+package com.hillel.vynnyk.homeworks.homework8;
 
 import java.util.Arrays;
 import java.util.stream.DoubleStream;
